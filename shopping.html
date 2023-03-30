@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="shopping.css">
+</head>
+<body>
+
+  <div class="div1" id="cart">
+    <h1  class="h2" >Shopping Cart</h1>
+
+    <div class="list">
+    <h3>Items List: </h3><ul type="square" id="items"></ul>
+    </div>
+
+    <p class="para"><b class="total">Total: Rs </b><span class="total" id="total"></span></p>
+  </div>
+  
+
+  <div class="card">
+    <div class="card-img">
+      <img class="img" src="cart.jpg" alt="">
+
+    </div>
+    <div class="card-info">
+      <p class="text-title">Add Item </p>
+      <p class="text-body"><label for="item"><b>Item: </b></label>
+        <input id="item"  type="text" class="input" required="">
+      </p>
+    </div>
+    <div class="card-footer">
+    <span class="text-title"><label for="price">Price:</label>
+      <input  id="price"  type="number" class="input" required="">
+
+       </span>
+   
+    <button id="addBtn">
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
+      </span>
+    </button>
+
+  </div></div>
+
+
+
+
+  <script>
+     function shopping() {
+
+     
+      let items = [];
+      let total = 0;
+    
+      function addToCart(item, price) {
+        items.push({item, price});
+        total += price;
+        renderCart();
+      }
+    
+      function renderCart() {
+        const itemList = document.getElementById('items');
+        const totalElem = document.getElementById('total');
+        itemList.innerHTML = '';
+        items.forEach(function(item) {
+          const li = document.createElement('li');
+          li.textContent = `${item.item} - Rs${item.price}`;
+          itemList.appendChild(li);
+        });
+        totalElem.textContent = total.toFixed(2);
+      }
+    
+      const addBtn = document.getElementById('addBtn');
+      addBtn.addEventListener('click', function() {
+        const item = document.getElementById('item').value;
+        const price = parseFloat(document.getElementById('price').value);
+        if (!isNaN(price)) {
+          addToCart(item, price);
+        }
+      });
+    }
+    shopping();
+
+  
+    
+  </script>
+  
+</body>
+</html>
